@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Post from "./../Post/Post";
+import "./Home.scss";
 
 function Home() {
   const [error, setError] = useState(null);
@@ -29,7 +30,6 @@ function Home() {
   } else {
     return (
       <div className="container">
-        Home
         {postList.map((post) => (
           <Post title={post.title}> text= {post.text}</Post>
         ))}
