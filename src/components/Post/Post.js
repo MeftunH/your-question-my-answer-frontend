@@ -1,46 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ReactDOM } from "react-dom";
 
-function Post() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [postList, setPostList] = useState([]);
+function Post(props) {
+ const {title,text} = props;
 
-  useEffect(() => {
-    fetch("/posts")
-    .then((res) => res.json())
-    .then(
-        (result) => {
-          setIsLoaded(true);
-          setPostList(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-          console.log(error);
-        }
-    );
-  }, []);
-
-  if (error) {
-    return <div> Error ...</div>
-    
-  } else if(!isLoaded) {
-    return <div> Loading </div>
-  } else {
-    return (
-      <div>
-        <ul>
-          {postList.map((post) => (
-            <li key={post.id}>
-              {post.title}
-              {post.text}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+ return(
+    <div>
+        {title}
+        {text}
+    </div>
+ )
 
 }
 
