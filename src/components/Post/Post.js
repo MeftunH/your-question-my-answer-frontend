@@ -37,7 +37,9 @@ function Post(props) {
  };
 
  return(
-    <Card sx={{ width: 800 }}>
+    <Card sx={{ width: 800,
+                textAlign: 'left',
+    }}>
     <CardHeader
       avatar={
         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
