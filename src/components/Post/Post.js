@@ -37,7 +37,7 @@ function Post(props) {
  };
 
  return(
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 800 }}>
     <CardHeader
       avatar={
         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
