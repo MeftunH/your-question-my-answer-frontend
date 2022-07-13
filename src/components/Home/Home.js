@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Post from "./../Post/Post";
 import "./Home.scss";
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
-
-
 
 function Home() {
   const [error, setError] = useState(null);
@@ -42,11 +37,11 @@ function Home() {
             flexWrap: 'wrap',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
+            height: '100%',
           }}
         >
           {postList.map((post) => (
-          <Post title={post.title} text={post.text}></Post>
+          <Post userId = {post.userId} userName = {post.userName} title={post.title} text={post.text} createdAt={post.createdAt}></Post>
         ))}
         </Container>
     );
