@@ -11,9 +11,9 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCommentIcon from '@mui/icons-material/AddComment';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   
 
 function Post(props) {
- const {title,text} = props;
+ const {title,text,userId,userName,createdAt} = props;
  const [expanded, setExpanded] = React.useState(false);
 
  const handleExpandClick = () => {
@@ -39,14 +39,16 @@ function Post(props) {
  return(
     <Card sx={{ width: 800,
                 textAlign: 'left',
+                marginTop: "6px",
     }}>
     <CardHeader
       avatar={
         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-          R
+          {userName.charAt(0).toUpperCase()}
         </Avatar>
       }
       title={title}
+      subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
     />
 
     <CardContent>
