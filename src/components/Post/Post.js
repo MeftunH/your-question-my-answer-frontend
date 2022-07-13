@@ -14,6 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { Link } from 'react-router-dom';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -39,13 +40,16 @@ function Post(props) {
  return(
     <Card sx={{ width: 800,
                 textAlign: 'left',
-                marginTop: "6px",
+                marginTop: "10px",
     }}>
     <CardHeader
       avatar={
+        <Link style={{ textDecoration: 'none',boxShadow: 'none', color: 'grey' }} 
+            className="navbar-link" to={{pathname : '/users/'+ userId}}>
         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
           {userName.charAt(0).toUpperCase()}
         </Avatar>
+        </Link>
       }
       title={title}
       subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
