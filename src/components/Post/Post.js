@@ -31,11 +31,16 @@ const ExpandMore = styled((props) => {
 
 function Post(props) {
  const {title,text,userId,userName,createdAt} = props;
+ const [liked, setLiked] = useState(false);
  const [expanded, setExpanded] = React.useState(false);
 
  const handleExpandClick = () => {
    setExpanded(!expanded);
  };
+
+ const handleLike = () => {
+  setLiked(!liked);
+ }
 
  return(
     <Card sx={{ width: 800,
@@ -61,8 +66,8 @@ function Post(props) {
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites">
-        <FavoriteIcon />
+      <IconButton aria-label="add to favorites" onClick={handleLike}>
+        <FavoriteIcon style={liked ? {color: "red"} : null}/>
       </IconButton>
       <ExpandMore
         expand={expanded}
