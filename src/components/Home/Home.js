@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Post from "./../Post/Post";
 import "./Home.scss";
 import Container from '@mui/material/Container';
+import PostForm from "../Post/PostForm";
 
 function Home() {
   const [error, setError] = useState(null);
@@ -40,6 +41,7 @@ function Home() {
             height: '100%',
           }}
         >
+          <PostForm userId = {1} userName = {"ddd"} title={"ddd"} text={"ddd"} createdAt={"ddd"}></PostForm>
           {postList.map((post) => (
           <Post userId = {post.userId} userName = {post.userName} title={post.title} text={post.text} createdAt={post.createdAt}></Post>
         ))}
