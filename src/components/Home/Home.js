@@ -31,7 +31,7 @@ function Home() {
   } else {
     return (
 
-        <div fixed 
+        <Container
         sx={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -43,7 +43,7 @@ function Home() {
           {postList.map((post) => (
           <Post userId = {post.userId} userName = {post.userName} title={post.title} text={post.text} createdAt={post.createdAt}></Post>
         ))}
-        </div>
+        </Container>
     );
   }
 }
