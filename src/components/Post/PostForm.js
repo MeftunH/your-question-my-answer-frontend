@@ -61,6 +61,7 @@ function PostForm(props) {
         <OutlinedInput
         id="outlined-adornment-amount"
         multiline
+        style ={{width: '100%'}}
         placeholder="Title"
         inputProps={{
         maxLength: 30,
@@ -77,10 +78,10 @@ function PostForm(props) {
       <OutlinedInput
         id="outlined-adornment-amount"
         multiline
+        style ={{width: '100%'}}
         placeholder="Text"
         inputProps={{
         maxLength: 300,
-        fullWidth: true,
         }}
         >
         </OutlinedInput>
