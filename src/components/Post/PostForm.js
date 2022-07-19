@@ -70,7 +70,7 @@ function PostForm(props) {
         >
         </OutlinedInput>
       }
-      subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
+      // subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
     />
 
     <CardContent>
@@ -95,19 +95,6 @@ function PostForm(props) {
         </OutlinedInput>
       </Typography>
     </CardContent>
-    <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites" onClick={handleLike}>
-        <FavoriteIcon style={liked ? {color: "red"} : null}/>
-      </IconButton>
-      <ExpandMore
-        expand={expanded}
-        onClick={handleExpandClick}
-        aria-expanded={expanded}
-        aria-label="show more"
-      >
-        <AddCommentIcon />
-      </ExpandMore>
-    </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
       </CardContent>
