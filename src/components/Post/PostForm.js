@@ -15,7 +15,7 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { Link } from 'react-router-dom';
-import { OutlinedInput } from "@mui/material";
+import { Button, InputAdornment, OutlinedInput } from "@mui/material";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -83,6 +83,14 @@ function PostForm(props) {
         inputProps={{
         maxLength: 300,
         }}
+        endAdornment={
+        <InputAdornment position="end">
+        <Button variant="contained" color="success">
+        Send
+        </Button>
+
+        </InputAdornment>
+        }
         >
         </OutlinedInput>
       </Typography>
