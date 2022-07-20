@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function PostForm(props) {
-  const { userId, userName, createdAt } = props;
+  const { userId, userName, createdAt,refreshPosts } = props;
   const [liked, setLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [text, setText] = useState("");
@@ -50,6 +50,7 @@ function PostForm(props) {
 
   const handleSubmit = () => {
     savePost();
+    refreshPosts();
   };
 
   const handleTitle = (value) => {
