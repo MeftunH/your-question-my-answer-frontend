@@ -31,6 +31,7 @@ function PostForm(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
+  const [isSent,setIsSent] = useState(false);
 
   const savePost = () => {
     fetch("/posts", {
@@ -50,15 +51,20 @@ function PostForm(props) {
 
   const handleSubmit = () => {
     savePost();
+    setIsSent(true);
+    setTitle("");
+    setText("");
     refreshPosts();
   };
 
   const handleTitle = (value) => {
     setTitle(value);
+    setIsSent(false);
   };
 
   const handleText = (value) => {
     setText(value);
+    setIsSent(false);
   };
   return (
     <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
@@ -84,6 +90,7 @@ function PostForm(props) {
               maxLength: 30,
               fullWidth: true,
             }}
+            value = {title}
             onChange={(i) => handleTitle(i.target.value)}
           ></OutlinedInput>
         }
@@ -100,6 +107,7 @@ function PostForm(props) {
             inputProps={{
               maxLength: 300,
             }}
+            value = {text}
             onChange={(i) => handleText(i.target.value)}
             endAdornment={
               <InputAdornment position="end">
