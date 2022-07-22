@@ -40,6 +40,8 @@ function Post(props) {
 
  const handleExpandClick = () => {
    setExpanded(!expanded);
+   refreshComments();
+   console.log(commentList);
  };
 
  const handleLike = () => {
