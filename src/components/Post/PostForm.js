@@ -85,7 +85,7 @@ function PostForm(props) {
     <div>
       <Snackbar open={isSent} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-         Post Send Successfully
+          Post Send Successfully
         </Alert>
       </Snackbar>
       <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
