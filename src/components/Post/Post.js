@@ -136,8 +136,7 @@ function Post(props) {
           <CommentForm
             userId={1}
             userName={"USER"}
-            text={"text"}
-            createdAt={"02/02/2022"}
+            postId={postId}
           ></CommentForm>
         </Container>
       </Collapse>
