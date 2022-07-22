@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { ReactDOM } from "react-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -30,9 +30,13 @@ const ExpandMore = styled((props) => {
   
 
 function Post(props) {
- const {title,text,userId,userName,createdAt} = props;
+ const {title,text,userId,userName,createdAt,postId} = props;
  const [liked, setLiked] = useState(false);
  const [expanded, setExpanded] = React.useState(false);
+ const [commentList, setCommentList] = useState([]);
+ const [isLoaded, setIsLoaded] = useState(false);
+ const [error, setError] = useState(null);
+ const isInitialMount = useRef(true);
 
  const handleExpandClick = () => {
    setExpanded(!expanded);
@@ -41,6 +45,33 @@ function Post(props) {
  const handleLike = () => {
   setLiked(!liked);
  }
+
+ const refreshComments = () => {
+  fetch("/posts?postId="+postId)
+  .then((res) => res.json())
+  .then(
+    (result) => {
+      setIsLoaded(true);
+      setCommentList(result);
+    },
+    (error) => {
+      setIsLoaded(true);
+      setError(error);
+      console.log(error);
+    }
+  );
+}
+
+useEffect(() => {
+  if(isInitialMount.current)
+  {
+    isInitialMount.current = false;
+  }
+  else
+  {
+    refreshComments();
+  }
+}, [commentList]);
 
  return(
     <Card sx={{ width: 800,
