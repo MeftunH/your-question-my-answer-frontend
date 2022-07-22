@@ -15,6 +15,7 @@ import {
 function CommentForm(props) {
   const { postId, userId, userName } = props;
   const [text, setText] = useState("");
+  const [isSent, setIsSent] = useState(false);
 
   const saveComment = () => {
     fetch("/comments", {
@@ -34,14 +35,29 @@ function CommentForm(props) {
 
   const handleSubmit = () => {
     saveComment();
+    setIsSent(true);
     setText("");
   };
   const handleChange = (value) => {
     setText(value);
+    setIsSent(false);
+  };
+  
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSent(false);
   };
 
   return (
     <div>
+         <Snackbar open={isSent} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Comment Sent Successfully
+        </Alert>
+      </Snackbar>
       <CardContent>
         <OutlinedInput
           id="outlined-adornment-amount"
