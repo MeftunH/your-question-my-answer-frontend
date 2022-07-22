@@ -15,7 +15,9 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import Moment from "react-moment";
 import "moment-timezone";
 import { Link } from "react-router-dom";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
+import Comment from "./../Comment/Comment";
+import CommentForm from "./../Comment/CommentForm";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -109,16 +111,34 @@ function Post(props) {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Container  sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-          }}>
-          {commentList.map((comment) => (
-          <Post userId = {1} userName = {"USER"} text={comment.text} createdAt={comment.createdAt}></Post>
-        ))}
+        <Container
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          {error
+            ? "error"
+            : isLoaded
+            ? commentList.map((comment) => (
+                <Comment
+                  userId={1}
+                  userName={"USER"}
+                  text={comment.text}
+                  createdAt={comment.createdAt}
+                ></Comment>
+              ))
+            : "Loading"}
+          <CommentForm
+            userId={1}
+            userName={"USER"}
+            text={"text"}
+            createdAt={"02/02/2022"}
+          ></CommentForm>
         </Container>
       </Collapse>
     </Card>
