@@ -34,6 +34,7 @@ function CommentForm(props) {
 
   const handleSubmit = () => {
     saveComment();
+    setText("");
   };
   const handleChange = (value) => {
     setText(value);
