@@ -11,7 +11,13 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import "moment-timezone";
 import { Link } from "react-router-dom";
-import { Button, InputAdornment, OutlinedInput } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  OutlinedInput,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,12 +32,12 @@ const ExpandMore = styled((props) => {
 }));
 
 function PostForm(props) {
-  const { userId, userName, createdAt,refreshPosts } = props;
+  const { userId, userName, createdAt, refreshPosts } = props;
   const [liked, setLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
-  const [isSent,setIsSent] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   const savePost = () => {
     fetch("/posts", {
@@ -66,67 +72,87 @@ function PostForm(props) {
     setText(value);
     setIsSent(false);
   };
-  return (
-    <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
-      <CardHeader
-        avatar={
-          <Link
-            style={{ textDecoration: "none", boxShadow: "none", color: "grey" }}
-            className="navbar-link"
-            to={{ pathname: "/users/" + userId }}
-          >
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {userName.charAt(0).toUpperCase()}
-            </Avatar>
-          </Link>
-        }
-        title={
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            multiline
-            style={{ width: "100%" }}
-            placeholder="Title"
-            inputProps={{
-              maxLength: 30,
-              fullWidth: true,
-            }}
-            value = {title}
-            onChange={(i) => handleTitle(i.target.value)}
-          ></OutlinedInput>
-        }
-        // subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
-      />
 
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            multiline
-            style={{ width: "100%" }}
-            placeholder="Text"
-            inputProps={{
-              maxLength: 300,
-            }}
-            value = {text}
-            onChange={(i) => handleText(i.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={handleSubmit}
-                >
-                  Send
-                </Button>
-              </InputAdornment>
-            }
-          ></OutlinedInput>
-        </Typography>
-      </CardContent>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent></CardContent>
-      </Collapse>
-    </Card>
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSent(false);
+  };
+
+  return (
+    <div>
+      <Snackbar open={isSent} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+         Post Send Successfully
+        </Alert>
+      </Snackbar>
+      <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
+        <CardHeader
+          avatar={
+            <Link
+              style={{
+                textDecoration: "none",
+                boxShadow: "none",
+                color: "grey",
+              }}
+              className="navbar-link"
+              to={{ pathname: "/users/" + userId }}
+            >
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                {userName.charAt(0).toUpperCase()}
+              </Avatar>
+            </Link>
+          }
+          title={
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              multiline
+              style={{ width: "100%" }}
+              placeholder="Title"
+              inputProps={{
+                maxLength: 30,
+                fullWidth: true,
+              }}
+              value={title}
+              onChange={(i) => handleTitle(i.target.value)}
+            ></OutlinedInput>
+          }
+          // subheader= {<Moment format="YYYY/MM/DD HH:mm">{createdAt}</Moment>}
+        />
+
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              multiline
+              style={{ width: "100%" }}
+              placeholder="Text"
+              inputProps={{
+                maxLength: 300,
+              }}
+              value={text}
+              onChange={(i) => handleText(i.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleSubmit}
+                  >
+                    Send
+                  </Button>
+                </InputAdornment>
+              }
+            ></OutlinedInput>
+          </Typography>
+        </CardContent>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent></CardContent>
+        </Collapse>
+      </Card>
+    </div>
   );
 }
 
