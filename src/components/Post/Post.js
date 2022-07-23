@@ -33,13 +33,13 @@ const ExpandMore = styled((props) => {
 
 function Post(props) {
   const { title, text, userId, userName, createdAt, postId,likes } = props;
-  const [liked, setLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [commentList, setCommentList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const isInitialMount = useRef(true);
   const likeCount = likes.length;
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -48,7 +48,7 @@ function Post(props) {
   };
 
   const handleLike = () => {
-    setLiked(!liked);
+    setIsLiked(!isLiked);
   };
 
   const refreshComments = () => {
@@ -66,6 +66,14 @@ function Post(props) {
         }
       );
   };
+  
+  const  checkLikes = () => {
+    var likeControl = likes.find(like => like.userId === userId);
+
+    if (likeControl) {
+      setIsLiked(true);
+    }
+  }
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -74,6 +82,10 @@ function Post(props) {
       refreshComments();
     }
   }, [commentList]);
+
+  useEffect(() => {
+    checkLikes();
+  }, []);
 
   return (
     <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
@@ -100,7 +112,7 @@ function Post(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={handleLike}>
-          <FavoriteIcon style={liked ? { color: "red" } : null} />
+          <FavoriteIcon style={isLiked ? { color: "red" } : null} />
         </IconButton>
         {likeCount}
         <ExpandMore
