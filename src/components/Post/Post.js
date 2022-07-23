@@ -38,8 +38,8 @@ function Post(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const isInitialMount = useRef(true);
-  const likeCount = likes.length;
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(likes.length);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -49,6 +49,11 @@ function Post(props) {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
+    if (!isLiked) {
+      setLikeCount(likeCount + 1);
+    } else {
+      setLikeCount(likeCount - 1);
+    }
   };
 
   const refreshComments = () => {
