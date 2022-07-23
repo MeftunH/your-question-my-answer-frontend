@@ -39,6 +39,7 @@ function Post(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const isInitialMount = useRef(true);
+  const likeCount = likes.length;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -101,6 +102,7 @@ function Post(props) {
         <IconButton aria-label="add to favorites" onClick={handleLike}>
           <FavoriteIcon style={liked ? { color: "red" } : null} />
         </IconButton>
+        {likeCount}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
