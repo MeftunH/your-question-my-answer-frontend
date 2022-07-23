@@ -92,6 +92,21 @@ function Post(props) {
     checkLikes();
   }, []);
 
+  const saveLike = () => {
+    fetch("/likes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId: postId,
+        userId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((error) => console.error("Error:", error));
+  };
+
   return (
     <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
       <CardHeader
