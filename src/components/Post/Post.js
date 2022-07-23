@@ -32,15 +32,15 @@ const ExpandMore = styled((props) => {
 }));
 
 function Post(props) {
-  const { title, text, userId, userName, createdAt, postId,likes } = props;
+  const { title, text, userId, userName, createdAt, postId, likes } = props;
   const [expanded, setExpanded] = React.useState(false);
   const [commentList, setCommentList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const isInitialMount = useRef(true);
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(likes.length); 
-  var likeId;
+  const [likeCount, setLikeCount] = useState(likes.length);
+  const [likeId, setLikeId] = useState(null);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -74,15 +74,16 @@ function Post(props) {
         }
       );
   };
-  
-  const  checkLikes = () => {
-    var likeControl = likes.find(like => like.userId === userId);
 
-    if (likeControl !== null) {
-      likeId = likeControl.id;
+  const checkLikes = () => {
+    var likeControl = likes.find(
+      (like) => "" + like.userId === localStorage.getItem("currentUser")
+    );
+    if (likeControl != null) {
+      setLikeId(likeControl.id);
       setIsLiked(true);
     }
-  }
+  };
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -103,8 +104,8 @@ function Post(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        postId: postId,
         userId: userId,
+        postId: postId,
       }),
     })
       .then((res) => res.json())
@@ -112,13 +113,10 @@ function Post(props) {
   };
 
   const deleteLike = () => {
-    fetch("/likes"+likeId, {
-      method: "DELETE"
-    })
-      .then((res) => res.json())
-      .catch((error) => console.error("Error:", error));
-  }
-
+    fetch("/likes/" + likeId, {
+      method: "DELETE",
+    });
+  };
 
   return (
     <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>

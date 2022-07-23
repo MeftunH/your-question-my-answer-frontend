@@ -45,10 +45,11 @@ function Home() {
             height: '100%',
           }}
         >
-          <PostForm refreshPosts = {refreshPosts} userId = {1} userName = {"ddd"} createdAt={"ddd"}></PostForm>
+          <PostForm refreshPosts = {refreshPosts} userId = {5} userName = {"ddd"} createdAt={"ddd"}></PostForm>
           {postList.map((post) => (
           <Post likes={post.postLikes} postId={post.id} userId = {post.userId} userName = {post.userName} title={post.title} text={post.text} createdAt={post.createdAt}></Post>
         ))}
+        
         </Container>
     );
   }
