@@ -39,7 +39,8 @@ function Post(props) {
   const [error, setError] = useState(null);
   const isInitialMount = useRef(true);
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(likes.length);
+  const [likeCount, setLikeCount] = useState(likes.length); 
+  var likeId;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -75,7 +76,8 @@ function Post(props) {
   const  checkLikes = () => {
     var likeControl = likes.find(like => like.userId === userId);
 
-    if (likeControl) {
+    if (likeControl !== null) {
+      likeId = likeControl.id;
       setIsLiked(true);
     }
   }
@@ -106,6 +108,15 @@ function Post(props) {
       .then((res) => res.json())
       .catch((error) => console.error("Error:", error));
   };
+
+  const deleteLike = () => {
+    fetch("/likes"+likeId, {
+      method: "DELETE"
+    })
+      .then((res) => res.json())
+      .catch((error) => console.error("Error:", error));
+  }
+
 
   return (
     <Card sx={{ width: 800, textAlign: "left", marginTop: "10px" }}>
