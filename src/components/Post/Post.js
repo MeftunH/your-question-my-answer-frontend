@@ -32,7 +32,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function Post(props) {
-  const { title, text, userId, userName, createdAt, postId } = props;
+  const { title, text, userId, userName, createdAt, postId,likes } = props;
   const [liked, setLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [commentList, setCommentList] = useState([]);
