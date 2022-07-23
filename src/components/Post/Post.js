@@ -51,8 +51,10 @@ function Post(props) {
   const handleLike = () => {
     setIsLiked(!isLiked);
     if (!isLiked) {
+      saveLike();
       setLikeCount(likeCount + 1);
     } else {
+      deleteLike();
       setLikeCount(likeCount - 1);
     }
   };
