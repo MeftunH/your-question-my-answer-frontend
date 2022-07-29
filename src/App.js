@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import User from './components/User/User';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Auth from './components/authentication/Auth';
 
 const darkTheme = createTheme({
   palette: {
@@ -21,6 +22,7 @@ function App() {
      <Routes>
       <Route exact path="/" element={<Home/>}/>
       <Route exact path="/users/:userId" element={<User/>}/>
+      <Route exact path="/auth" component={Auth}></Route>
      </Routes>
      </BrowserRouter>
     </div>
