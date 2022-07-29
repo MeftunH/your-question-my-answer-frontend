@@ -22,7 +22,7 @@ function App() {
      <Routes>
       <Route exact path="/" element={<Home/>}/>
       <Route exact path="/users/:userId" element={<User/>}/>
-      <Route exact path="/auth" component={Auth}></Route>
+      <Route exact path="/auth" element={<Auth/>}></Route>
      </Routes>
      </BrowserRouter>
     </div>
