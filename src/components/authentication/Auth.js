@@ -9,6 +9,7 @@ function Auth() {
       <InputLabel style={{ top: 40 }}>Password</InputLabel>
       <Input style={{ top: 40 }}></Input>
       <Button variant="contained" color="primary" style={{ top: 30 }}> Let Me Register </Button>        
+      <Button variant="contained" color="primary" style={{ top: 30 }}> Let Me Register </Button>        
        </FormControl>
   );
 }
